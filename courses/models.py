@@ -20,7 +20,7 @@ class Lesson(models.Model):
     title = models.CharField(max_length=100, verbose_name='название урока')
     description = models.TextField(verbose_name='описание урока')
     photo = models.ImageField(upload_to='lessons/', **NULLABLE, verbose_name='фото урока')
-    video = models.URLField(verbose_name='видео урока')
+    video = models.URLField(verbose_name='видео урока', **NULLABLE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='курс')
 
     class Meta:
