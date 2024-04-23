@@ -1,0 +1,98 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "12345",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Константин",
+      "last_name": "Онищенко",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-22T19:31:10.230Z",
+      "email": "kostik80_80@mail.ru",
+      "phone": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "12345",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Владимир",
+      "last_name": "Петров",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-22T19:39:34.205Z",
+      "email": "Petrov_VP@mail.ru",
+      "phone": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "12345",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Сергей",
+      "last_name": "Сергеев",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-22T19:40:23.954Z",
+      "email": "sergeev@mail.ru",
+      "phone": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "data_pay": "2020-08-25T00:00:00Z",
+      "course": 2,
+      "lesson": 2,
+      "price": 11500,
+      "Payment_method": "cash"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "data_pay": "2023-08-25T00:00:00Z",
+      "course": 3,
+      "lesson": 3,
+      "price": 12500,
+      "Payment_method": "cash"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "data_pay": "2024-08-25T00:00:00Z",
+      "course": null,
+      "lesson": 3,
+      "price": 2500,
+      "Payment_method": "card"
+    }
+  }
+]
