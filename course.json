@@ -1,1 +1,75 @@
-[{"model": "courses.course", "pk": 2, "fields": {"title": "Python", "photo": "", "description": "Создание приложений на Django"}}, {"model": "courses.course", "pk": 3, "fields": {"title": "PHP", "photo": "", "description": "Создание приложений на WordPress"}}, {"model": "courses.lesson", "pk": 2, "fields": {"title": "Знакомство с языком Python", "description": "Первые шаги на пути в IT", "photo": "", "video": null, "course": 2}}, {"model": "courses.lesson", "pk": 3, "fields": {"title": "Что такое переменные", "description": "Расказывается про переменные и вчём их плюсы", "photo": "", "video": null, "course": 2}}, {"model": "courses.lesson", "pk": 4, "fields": {"title": "План курса", "description": "План курса по PHP и как его правильно проходить", "photo": "", "video": null, "course": 3}}, {"model": "courses.lesson", "pk": 5, "fields": {"title": "Подготовка к учебе", "description": "Установим все необходимое програмное обеспичение и плагины", "photo": "", "video": null, "course": 3}}, {"model": "courses.lesson", "pk": 6, "fields": {"title": "Моя первая программа", "description": "Напишем первую программу и выведм все на экран", "photo": "", "video": null, "course": 3}}]
+[
+  {
+    "model": "courses.course",
+    "pk": 2,
+    "fields": {
+      "title": "Python",
+      "photo": "",
+      "description": "РЎРѕР·РґР°РЅРёРµ РїСЂРёР»РѕР¶РµРЅРёР№ РЅР° Django"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 3,
+    "fields": {
+      "title": "PHP",
+      "photo": "",
+      "description": "РЎРѕР·РґР°РЅРёРµ РїСЂРёР»РѕР¶РµРЅРёР№ РЅР° WordPress"
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 2,
+    "fields": {
+      "title": "Р—РЅР°РєРѕРјСЃС‚РІРѕ СЃ СЏР·С‹РєРѕРј Python",
+      "description": "РџРµСЂРІС‹Рµ С€Р°РіРё РЅР° РїСѓС‚Рё РІ IT",
+      "photo": "",
+      "video": null,
+      "course": 2
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 3,
+    "fields": {
+      "title": "Р§С‚Рѕ С‚Р°РєРѕРµ РїРµСЂРµРјРµРЅРЅС‹Рµ",
+      "description": "Р Р°СЃРєР°Р·С‹РІР°РµС‚СЃСЏ РїСЂРѕ РїРµСЂРµРјРµРЅРЅС‹Рµ Рё РІС‡С‘Рј РёС… РїР»СЋСЃС‹",
+      "photo": "",
+      "video": null,
+      "course": 2
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 4,
+    "fields": {
+      "title": "РџР»Р°РЅ РєСѓСЂСЃР°",
+      "description": "РџР»Р°РЅ РєСѓСЂСЃР° РїРѕ PHP Рё РєР°Рє РµРіРѕ РїСЂР°РІРёР»СЊРЅРѕ РїСЂРѕС…РѕРґРёС‚СЊ",
+      "photo": "",
+      "video": null,
+      "course": 3
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 5,
+    "fields": {
+      "title": "РџРѕРґРіРѕС‚РѕРІРєР° Рє СѓС‡РµР±Рµ",
+      "description": "РЈСЃС‚Р°РЅРѕРІРёРј РІСЃРµ РЅРµРѕР±С…РѕРґРёРјРѕРµ РїСЂРѕРіСЂР°РјРЅРѕРµ РѕР±РµСЃРїРёС‡РµРЅРёРµ Рё РїР»Р°РіРёРЅС‹",
+      "photo": "",
+      "video": null,
+      "course": 3
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 6,
+    "fields": {
+      "title": "РњРѕСЏ РїРµСЂРІР°СЏ РїСЂРѕРіСЂР°РјРјР°",
+      "description": "РќР°РїРёС€РµРј РїРµСЂРІСѓСЋ РїСЂРѕРіСЂР°РјРјСѓ Рё РІС‹РІРµРґРј РІСЃРµ РЅР° СЌРєСЂР°РЅ",
+      "photo": "",
+      "video": null,
+      "course": 3
+    }
+  }
+]
