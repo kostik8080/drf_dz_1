@@ -1,70 +1,49 @@
 from django.shortcuts import render
-from rest_framework.viewsets import ViewSet, generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ViewSet, generics, ModelViewSet
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from courses.models import Course, Lesson
+from courses.permissions import ModeratorPermission, IsUser
 from courses.serializers import CourseSerializer, LessonSerializer
 
 
-class CourseViewSet(ViewSet):
+class CourseViewSet(ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
 
-    def list(self, request):
+    def perform_create(self, serializer):
         """
-        отображение списка сущностей, HTTP-метод GET.
+        Создание пользователя по умодчанию кто авторизован.
         """
-        queryset = Course.objects.all()
-        serializer = CourseSerializer(queryset, many=True)
-        return Response(serializer.data)
+        course = serializer.save()
+        course.user = self.request.user
+        course.save()
 
-    def create(self, request):
-        """
-        создание сущности, HTTP-метод POST.
-        """
-
-        serializer = CourseSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
-
-    def retrieve(self, request, pk=None):
-        """
-        отображение сущности, HTTP-метод GET.
-        """
-
-        queryset = Course.objects.all()
-        course = get_object_or_404(queryset, pk=pk)
-        serializer = CourseSerializer(course)
-        return Response(serializer.data)
-
-    def update(self, request, pk=None):
-        """
-        обновление сущности, HTTP-метод PUT.
-        """
-
-        queryset = Course.objects.all()
-        course = get_object_or_404(queryset, pk=pk)
-        serializer = CourseSerializer(course, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
-
-    def destroy(self, request, pk=None):
-        """
-        удаление сущности, HTTP-метод DELETE.
-        """
-
-        queryset = Course.objects.all()
-        course = get_object_or_404(queryset, pk=pk)
-        course.delete()
-        return Response(status=204)
+    def get_permissions(self):
+        if self.action == 'create':
+            self.permission_classes = (~ModeratorPermission,)
+        elif self.action in ['update', 'retrieve']:
+            self.permission_classes = (ModeratorPermission | IsUser,)
+        elif self.action == 'destroy':
+            self.permission_classes = (~ModeratorPermission | IsUser,)
+        return super().get_permissions()
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
     """Создание нового урока"""
     serializer_class = LessonSerializer
+
+    permission_classes = (~ModeratorPermission, IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        """
+        Создание пользователя по умодчанию кто авторизован.
+        """
+        lesson = serializer.save()
+        lesson.user = self.request.user
+        lesson.save()
 
 
 class LessonListAPIView(generics.ListAPIView):
@@ -77,15 +56,17 @@ class LessonRetrieveAPIView(generics.RetrieveAPIView):
     """Получение урока по id"""
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+    permission_classes = (IsAuthenticated, ModeratorPermission | IsUser,)
 
 
 class LessonUpdateAPIView(generics.UpdateAPIView):
     """Обновление урока по id"""
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+    permission_classes = (IsAuthenticated, ModeratorPermission | IsUser,)
 
 
 class LessonDeleteAPIView(generics.DestroyAPIView):
     """Удаление урока по id"""
     queryset = Lesson.objects.all()
-
+    permission_classes = (IsAuthenticated, IsUser | ~ModeratorPermission,)
