@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ViewSet, generics, ModelViewSet
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -23,11 +23,11 @@ class CourseViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'create':
-            self.permission_classes = (~IsModer,)
+            self.permission_classes = (~IsModer, IsAdminUser,)
         elif self.action in ['update', 'retrieve']:
             self.permission_classes = (IsModer | IsOwner,)
         elif self.action == 'destroy':
-            self.permission_classes = (~IsModer | IsOwner,)
+            self.permission_classes = (~IsModer | ~IsAdminUser | IsOwner,)
         return super().get_permissions()
 
 
@@ -35,7 +35,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
     """Создание нового урока"""
     serializer_class = LessonSerializer
 
-    permission_classes = (~IsModer, IsAuthenticated,)
+    permission_classes = (~IsModer, ~IsAdminUser, IsAuthenticated,)
 
     def perform_create(self, serializer):
         """
@@ -69,4 +69,4 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
 class LessonDeleteAPIView(generics.DestroyAPIView):
     """Удаление урока по id"""
     queryset = Lesson.objects.all()
-    permission_classes = (IsAuthenticated, IsOwner | ~IsModer,)
+    permission_classes = (IsAuthenticated, IsOwner | ~IsModer | ~IsAdminUser,)
