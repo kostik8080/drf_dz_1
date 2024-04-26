@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from courses.models import Course, Lesson
-from courses.permissions import ModeratorPermission, IsUser
+from courses.permissions import IsModer, IsOwner
 from courses.serializers import CourseSerializer, LessonSerializer
 
 
@@ -23,11 +23,11 @@ class CourseViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'create':
-            self.permission_classes = (~ModeratorPermission,)
+            self.permission_classes = (~IsModer,)
         elif self.action in ['update', 'retrieve']:
-            self.permission_classes = (ModeratorPermission | IsUser,)
+            self.permission_classes = (IsModer | IsOwner,)
         elif self.action == 'destroy':
-            self.permission_classes = (~ModeratorPermission | IsUser,)
+            self.permission_classes = (~IsModer | IsOwner,)
         return super().get_permissions()
 
 
@@ -35,7 +35,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
     """Создание нового урока"""
     serializer_class = LessonSerializer
 
-    permission_classes = (~ModeratorPermission, IsAuthenticated,)
+    permission_classes = (~IsModer, IsAuthenticated,)
 
     def perform_create(self, serializer):
         """
@@ -56,17 +56,17 @@ class LessonRetrieveAPIView(generics.RetrieveAPIView):
     """Получение урока по id"""
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = (IsAuthenticated, ModeratorPermission | IsUser,)
+    permission_classes = (IsAuthenticated, IsModer | IsOwner,)
 
 
 class LessonUpdateAPIView(generics.UpdateAPIView):
     """Обновление урока по id"""
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = (IsAuthenticated, ModeratorPermission | IsUser,)
+    permission_classes = (IsAuthenticated, IsModer | IsOwner,)
 
 
 class LessonDeleteAPIView(generics.DestroyAPIView):
     """Удаление урока по id"""
     queryset = Lesson.objects.all()
-    permission_classes = (IsAuthenticated, IsUser | ~ModeratorPermission,)
+    permission_classes = (IsAuthenticated, IsOwner | ~IsModer,)
