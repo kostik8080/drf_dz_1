@@ -8,6 +8,7 @@ class Course(models.Model):
     title = models.CharField(max_length=100, verbose_name='название курса')
     photo = models.ImageField(upload_to='courses/', **NULLABLE, verbose_name='фото курса')
     description = models.TextField(verbose_name='описание курса')
+    url = models.URLField(verbose_name='URL курса', **NULLABLE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='пользователь',
                              **NULLABLE)
 
