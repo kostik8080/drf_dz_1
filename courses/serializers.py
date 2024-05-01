@@ -8,7 +8,7 @@ from subscription.models import Subscription
 class CourseSerializer(serializers.ModelSerializer):
     sub_title = serializers.SerializerMethodField()
     lsesons_count = serializers.SerializerMethodField()
-    lessons_info = serializers.SerializerMethodField()
+    lessons_info = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Course

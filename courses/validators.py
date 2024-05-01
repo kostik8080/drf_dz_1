@@ -9,11 +9,9 @@ class UrlValidator:
 
     def __call__(self, value):
         reg = "https://www.youtube.com/"
-        try:
-            tmp_value = value[self.field]
-        except KeyError:
-            raise ValidationError(f'Поле {self.field} не найдено в данных')
+        tmp_value = dict(value).get(self.field)
+        if tmp_value is not None:
+            if reg not in tmp_value:
+                raise ValidationError('Недопустимый URL-адрес')
 
-        if reg not in tmp_value:
-            raise ValidationError('Недопустимый URL-адрес')
 
