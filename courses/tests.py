@@ -82,5 +82,6 @@ class LessonTests(APITestCase):
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Lesson.objects.all().count(), 0)
-
+        with self.assertRaises(Lesson.DoesNotExist):
+            lesson = Lesson.objects.get(pk=self.lesson.pk)
 

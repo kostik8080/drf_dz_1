@@ -34,14 +34,6 @@ class CourseSerializer(serializers.ModelSerializer):
         except Subscription.DoesNotExist:
             return 'Вы не подписаны на курс '
 
-    # def to_representation(self, instance):
-    #     data = super().to_representation(instance)
-    #     # Удаляем course_id и user_id из представления
-    #     del data['course_id']
-    #     del data['user_id']
-    #     return data
-
-
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
