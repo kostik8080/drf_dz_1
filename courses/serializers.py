@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_serializer_method
 from rest_framework import serializers
 
 from courses.models import Course, Lesson
@@ -17,11 +18,12 @@ class CourseSerializer(serializers.ModelSerializer):
             UrlValidator(field='url')
         ]
 
-
+    @swagger_serializer_method(serializer_or_field=serializers.IntegerField)
     def get_lsesons_count(self, obj):
         lsesons_count = Lesson.objects.filter(course=obj).count()
         return lsesons_count
 
+    @swagger_serializer_method(serializer_or_field=serializers.DictField)
     def get_lessons_info(self, obj):
         lessons_info = Lesson.objects.filter(course=obj).values()
         return lessons_info

@@ -11,6 +11,7 @@ from courses.serializers import CourseSerializer, LessonSerializer
 
 
 class CourseViewSet(ModelViewSet):
+    """Список курсов. Создание, редактирование, удаление."""
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     pagination_class = CoursePagination
