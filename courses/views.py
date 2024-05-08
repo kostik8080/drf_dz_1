@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ViewSet, generics, ModelViewSet
 from rest_framework.response import Response
@@ -8,6 +9,8 @@ from courses.models import Course, Lesson
 from courses.paginators import CoursePagination, LessonPagination
 from courses.permissions import IsModer, IsOwner
 from courses.serializers import CourseSerializer, LessonSerializer
+from courses.tasks import send_message
+from subscription.models import Subscription
 
 
 class CourseViewSet(ModelViewSet):
@@ -32,6 +35,23 @@ class CourseViewSet(ModelViewSet):
         elif self.action == 'destroy':
             self.permission_classes = (~IsModer | ~IsAdminUser | IsOwner,)
         return super().get_permissions()
+
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        subscription = Subscription.objects.filter(course=course)
+        if subscription:
+            subscription_email = []
+            for subscript in subscription:
+                subscription_email.append(subscript.user.email)
+                print(subscript.user.email)
+                print(subscription_email)
+            send_message.delay(subscription_email)
+
+        course.save()
+
+
+
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
