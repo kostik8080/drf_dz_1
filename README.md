@@ -28,8 +28,8 @@ ___
 ___
 
 * :white_check_mark: Откройте терминал и перейдите в корневую директорию проекта.
-* :white_check_mark: Запустите команду <mark>docker-compose build</mark>, <mark>docker-compose up</mark>, или 
-можно воспользоваться одной командой <mark>docker-compose up -d --build</mark> для запуска Docker контейнеров, 
+* :white_check_mark: Запустите команду <h3>docker-compose build</h3>, <h3>docker-compose up</h3>, или 
+можно воспользоваться одной командой <h3>docker-compose up -d --build</h3> для запуска Docker контейнеров, 
 описанных в файле docker-compose.yml.
 * :white_check_mark: Дождитесь, пока все контейнеры успешно запустятся.
 ___
