@@ -187,3 +187,7 @@ CELERY_TASK_TRACK_STARTED = True
 
 # Максимальное время на выполнение задачи
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')  # Токен для Telegram бота.
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')  # ID чата, в котором будет отправлено сообщение.
+TELEGRAM_URL = 'https://api.telegram.org/bot'
