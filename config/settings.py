@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+from config.celery import app
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -181,6 +183,8 @@ CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')  # Например, 
 
 # Часовой пояс для работы Celery
 CELERY_TIMEZONE = TIME_ZONE
+
+app.conf.broker_connection_retry_on_startup = True
 
 # Флаг отслеживания выполнения задач
 CELERY_TASK_TRACK_STARTED = True
