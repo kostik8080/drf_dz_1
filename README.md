@@ -3,7 +3,7 @@
 ## Шаг 1: Установка Docker и Docker Compose
 ___
 
-* :white_check_mark: Убедитесь, что Docker установлен на вашей системе. Если Docker не установлен, следуйте инструкциям для вашей операционной системы, чтобы установить Docker.
+* :white_check_mark: Убедитесь, что Docker установлен на вашей системе. Если Docker не установлен, следуйте инструкциям для вашей операционной системы, чтобы установить Docker. [скачать Docker Desktop](https://www.docker.com/products/docker-desktop/)
 * :white_check_mark: Убедитесь, что Docker Compose установлен на вашей системе. Если Docker Compose не установлен, следуйте инструкциям для вашей операционной системы, чтобы установить Docker Compose.
 ___
 
@@ -24,7 +24,7 @@ ___
 ___
 
 * :white_check_mark: Откройте терминал и перейдите в корневую директорию проекта.
-* :white_check_mark: Запустите команду docker-compose up для запуска Docker контейнеров, описанных в файле docker-compose.yml.
+* :white_check_mark: Запустите команду docker-compose build, docker-compose up, или можно воспользоваться одной командой docker-compose up -d --build для запуска Docker контейнеров, описанных в файле docker-compose.yml.
 * :white_check_mark: Дождитесь, пока все контейнеры успешно запустятся.
 ___
 
